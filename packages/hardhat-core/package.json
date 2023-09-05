@@ -19,6 +19,9 @@
         "task-runner",
         "solidity"
     ],
+    "publishConfig": {
+        "access": "public"
+    },
     "bin": "internal/cli/bootstrap.js",
     "scripts": {
         "lint": "yarn prettier --check && yarn eslint",
