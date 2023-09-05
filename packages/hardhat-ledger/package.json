@@ -49,8 +49,8 @@
     "ora": "^5.4.1"
   },
   "devDependencies": {
-    "@types/fs-extra": "^5.1.0",
     "@types/chai": "^4.2.0",
+    "@types/fs-extra": "^5.1.0",
     "@types/mocha": ">=9.1.0",
     "@types/node": "^16.0.0",
     "@typescript-eslint/eslint-plugin": "5.61.0",
@@ -64,8 +64,8 @@
     "hardhat": "^2.16.0",
     "mocha": "^10.0.0",
     "prettier": "2.4.1",
-    "ts-node": "^10.8.0",
     "sinon": "^9.0.0",
+    "ts-node": "^10.8.0",
     "typescript": "~5.0.0"
   },
   "peerDependencies": {
