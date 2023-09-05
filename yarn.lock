@@ -1241,6 +1241,109 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@khangdt22/hardhat@workspace:packages/hardhat-core":
+  version: 0.0.0-use.local
+  resolution: "@khangdt22/hardhat@workspace:packages/hardhat-core"
+  dependencies:
+    "@ethersproject/abi": ^5.1.2
+    "@metamask/eth-sig-util": ^4.0.0
+    "@nomicfoundation/eslint-plugin-hardhat-internal-rules": ^1.0.0
+    "@nomicfoundation/eslint-plugin-slow-imports": ^1.0.0
+    "@nomicfoundation/ethereumjs-block": 5.0.2
+    "@nomicfoundation/ethereumjs-blockchain": 7.0.2
+    "@nomicfoundation/ethereumjs-common": 4.0.2
+    "@nomicfoundation/ethereumjs-evm": 2.0.2
+    "@nomicfoundation/ethereumjs-rlp": 5.0.2
+    "@nomicfoundation/ethereumjs-statemanager": 2.0.2
+    "@nomicfoundation/ethereumjs-trie": 6.0.2
+    "@nomicfoundation/ethereumjs-tx": 5.0.2
+    "@nomicfoundation/ethereumjs-util": 9.0.2
+    "@nomicfoundation/ethereumjs-vm": 7.0.2
+    "@nomicfoundation/solidity-analyzer": ^0.1.0
+    "@sentry/node": ^5.18.1
+    "@types/async-eventemitter": ^0.2.1
+    "@types/bn.js": ^5.1.0
+    "@types/chai": ^4.2.0
+    "@types/chai-as-promised": ^7.1.3
+    "@types/ci-info": ^2.0.0
+    "@types/debug": ^4.1.4
+    "@types/find-up": ^2.1.1
+    "@types/fs-extra": ^5.1.0
+    "@types/glob": ^7.1.1
+    "@types/keccak": ^3.0.1
+    "@types/lodash": ^4.14.123
+    "@types/mocha": ">=9.1.0"
+    "@types/node": ^16.0.0
+    "@types/resolve": ^1.17.1
+    "@types/semver": ^6.0.2
+    "@types/sinon": ^9.0.8
+    "@types/uuid": ^8.3.1
+    "@types/ws": ^7.2.1
+    "@typescript-eslint/eslint-plugin": 5.61.0
+    "@typescript-eslint/parser": 5.61.0
+    adm-zip: ^0.4.16
+    aggregate-error: ^3.0.0
+    ansi-escapes: ^4.3.0
+    bignumber.js: ^9.0.2
+    bn.js: ^5.1.0
+    chai: ^4.2.0
+    chai-as-promised: ^7.1.1
+    chalk: ^2.4.2
+    chokidar: ^3.4.0
+    ci-info: ^2.0.0
+    debug: ^4.1.1
+    enquirer: ^2.3.0
+    env-paths: ^2.2.0
+    eslint: ^8.44.0
+    eslint-config-prettier: 8.3.0
+    eslint-plugin-import: 2.27.5
+    eslint-plugin-no-only-tests: 3.0.0
+    eslint-plugin-prettier: 3.4.0
+    ethereum-cryptography: ^1.0.3
+    ethereumjs-abi: ^0.6.8
+    ethers: ^6.1.0
+    ethers-v5: "npm:ethers@5"
+    find-up: ^2.1.0
+    fp-ts: 1.19.3
+    fs-extra: ^7.0.1
+    glob: 7.2.0
+    immutable: ^4.0.0-rc.12
+    io-ts: 1.10.4
+    keccak: ^3.0.2
+    lodash: ^4.17.11
+    lru-cache: ^10.0.1
+    mnemonist: ^0.38.0
+    mocha: ^10.0.0
+    p-map: ^4.0.0
+    prettier: 2.4.1
+    raw-body: ^2.4.1
+    resolve: 1.17.0
+    rimraf: ^3.0.2
+    semver: ^6.3.0
+    sinon: ^9.0.0
+    solc: 0.7.3
+    source-map-support: ^0.5.13
+    stacktrace-parser: ^0.1.10
+    time-require: ^0.1.2
+    ts-node: ^10.8.0
+    tsort: 0.0.1
+    typescript: ~5.0.0
+    undici: ^5.14.0
+    uuid: ^8.3.2
+    ws: ^7.4.6
+  peerDependencies:
+    ts-node: "*"
+    typescript: "*"
+  peerDependenciesMeta:
+    ts-node:
+      optional: true
+    typescript:
+      optional: true
+  bin:
+    hardhat: internal/cli/bootstrap.js
+  languageName: unknown
+  linkType: soft
+
 "@ledgerhq/cryptoassets@npm:^9.10.0, @ledgerhq/cryptoassets@npm:^9.8.0":
   version: 9.10.0
   resolution: "@ledgerhq/cryptoassets@npm:9.10.0"
@@ -2884,6 +2987,13 @@ __metadata:
   version: 4.14.197
   resolution: "@types/lodash@npm:4.14.197"
   checksum: 53d7567d1704de76cf33266c78062e0fd722d4b846e5b1417d0b6ef0ee41c0d9c451b92bc34f73d5f1fcc45c7d36511e92f6f47a9279b48157ba60a92ddaa078
+  languageName: node
+  linkType: hard
+
+"@types/lru-cache@npm:^5.1.0":
+  version: 5.1.1
+  resolution: "@types/lru-cache@npm:5.1.1"
+  checksum: e1d6c0085f61b16ec5b3073ec76ad1be4844ea036561c3f145fc19f71f084b58a6eb600b14128aa95809d057d28f1d147c910186ae51219f58366ffd2ff2e118
   languageName: node
   linkType: hard
 
@@ -7718,14 +7828,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"hardhat@^2.0.0, hardhat@^2.0.4, hardhat@^2.11.0, hardhat@^2.16.0, hardhat@^2.17.2, hardhat@^2.6.4, hardhat@^2.8.3, hardhat@^2.9.4, hardhat@^2.9.5, hardhat@workspace:packages/hardhat-core":
-  version: 0.0.0-use.local
-  resolution: "hardhat@workspace:packages/hardhat-core"
+"hardhat@npm:^2.0.0, hardhat@npm:^2.0.4, hardhat@npm:^2.11.0, hardhat@npm:^2.16.0, hardhat@npm:^2.17.2, hardhat@npm:^2.6.4, hardhat@npm:^2.8.3, hardhat@npm:^2.9.4, hardhat@npm:^2.9.5":
+  version: 2.17.2
+  resolution: "hardhat@npm:2.17.2"
   dependencies:
     "@ethersproject/abi": ^5.1.2
     "@metamask/eth-sig-util": ^4.0.0
-    "@nomicfoundation/eslint-plugin-hardhat-internal-rules": ^1.0.0
-    "@nomicfoundation/eslint-plugin-slow-imports": ^1.0.0
     "@nomicfoundation/ethereumjs-block": 5.0.2
     "@nomicfoundation/ethereumjs-blockchain": 7.0.2
     "@nomicfoundation/ethereumjs-common": 4.0.2
@@ -7738,48 +7846,19 @@ __metadata:
     "@nomicfoundation/ethereumjs-vm": 7.0.2
     "@nomicfoundation/solidity-analyzer": ^0.1.0
     "@sentry/node": ^5.18.1
-    "@types/async-eventemitter": ^0.2.1
     "@types/bn.js": ^5.1.0
-    "@types/chai": ^4.2.0
-    "@types/chai-as-promised": ^7.1.3
-    "@types/ci-info": ^2.0.0
-    "@types/debug": ^4.1.4
-    "@types/find-up": ^2.1.1
-    "@types/fs-extra": ^5.1.0
-    "@types/glob": ^7.1.1
-    "@types/keccak": ^3.0.1
-    "@types/lodash": ^4.14.123
-    "@types/mocha": ">=9.1.0"
-    "@types/node": ^16.0.0
-    "@types/resolve": ^1.17.1
-    "@types/semver": ^6.0.2
-    "@types/sinon": ^9.0.8
-    "@types/uuid": ^8.3.1
-    "@types/ws": ^7.2.1
-    "@typescript-eslint/eslint-plugin": 5.61.0
-    "@typescript-eslint/parser": 5.61.0
+    "@types/lru-cache": ^5.1.0
     adm-zip: ^0.4.16
     aggregate-error: ^3.0.0
     ansi-escapes: ^4.3.0
-    bignumber.js: ^9.0.2
-    bn.js: ^5.1.0
-    chai: ^4.2.0
-    chai-as-promised: ^7.1.1
     chalk: ^2.4.2
     chokidar: ^3.4.0
     ci-info: ^2.0.0
     debug: ^4.1.1
     enquirer: ^2.3.0
     env-paths: ^2.2.0
-    eslint: ^8.44.0
-    eslint-config-prettier: 8.3.0
-    eslint-plugin-import: 2.27.5
-    eslint-plugin-no-only-tests: 3.0.0
-    eslint-plugin-prettier: 3.4.0
     ethereum-cryptography: ^1.0.3
     ethereumjs-abi: ^0.6.8
-    ethers: ^6.1.0
-    ethers-v5: "npm:ethers@5"
     find-up: ^2.1.0
     fp-ts: 1.19.3
     fs-extra: ^7.0.1
@@ -7788,23 +7867,16 @@ __metadata:
     io-ts: 1.10.4
     keccak: ^3.0.2
     lodash: ^4.17.11
-    lru-cache: ^10.0.1
     mnemonist: ^0.38.0
     mocha: ^10.0.0
     p-map: ^4.0.0
-    prettier: 2.4.1
     raw-body: ^2.4.1
     resolve: 1.17.0
-    rimraf: ^3.0.2
     semver: ^6.3.0
-    sinon: ^9.0.0
     solc: 0.7.3
     source-map-support: ^0.5.13
     stacktrace-parser: ^0.1.10
-    time-require: ^0.1.2
-    ts-node: ^10.8.0
     tsort: 0.0.1
-    typescript: ~5.0.0
     undici: ^5.14.0
     uuid: ^8.3.2
     ws: ^7.4.6
@@ -7818,8 +7890,9 @@ __metadata:
       optional: true
   bin:
     hardhat: internal/cli/bootstrap.js
-  languageName: unknown
-  linkType: soft
+  checksum: 7c80f45354c82e812e04ab75e6cab40c1e561969265762f5d254365beecd6bb261186d3da445de5963ca2e1125bf495f3263aa9f762f436d8920ca4551e31204
+  languageName: node
+  linkType: hard
 
 "has-bigints@npm:^1.0.1, has-bigints@npm:^1.0.2":
   version: 1.0.2
