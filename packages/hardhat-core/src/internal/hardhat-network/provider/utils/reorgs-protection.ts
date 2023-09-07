@@ -35,6 +35,11 @@ export function getLargestPossibleReorg(networkId: number): bigint | undefined {
   if (networkId === 100) {
     return 38n;
   }
+
+  // BSC
+  if (networkId === 56) {
+    return 0n;
+  }
 }
 
 export const FALLBACK_MAX_REORG = 30n;

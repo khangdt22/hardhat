@@ -11,7 +11,6 @@ import {
 } from "@nomicfoundation/ethereumjs-util";
 import { Map as ImmutableMap, Record as ImmutableRecord } from "immutable";
 
-import { LRUCache } from "lru-cache";
 import { assertHardhatInvariant } from "../../../core/errors";
 import { InternalError } from "../../../core/providers/errors";
 import { keccak256 } from "../../../util/keccak";
@@ -43,12 +42,6 @@ const notCheckpointedError = (method: string) =>
 const notSupportedError = (method: string) =>
   new Error(`${method} is not supported when forking from remote network`);
 
-interface AccountData {
-  code: Buffer;
-  transactionCount: bigint;
-  balance: bigint;
-}
-
 export class ForkStateManager implements StateManager {
   private _state: State = ImmutableMap<string, ImmutableRecord<AccountState>>();
   private _initialStateRoot: string = randomHash();
@@ -58,8 +51,6 @@ export class ForkStateManager implements StateManager {
   private _stateCheckpoints: string[] = [];
   private _contextBlockNumber = this._forkBlockNumber;
   private _contextChanged = false;
-  private _accountCache = new LRUCache<string, AccountData>({ max: 1000 });
-  private _storageCache = new LRUCache<string, Buffer>({ max: 1000 });
 
   constructor(
     private readonly _jsonRpcClient: JsonRpcClient,
@@ -131,17 +122,10 @@ export class ForkStateManager implements StateManager {
       localCode !== undefined ? toBuffer(localCode) : undefined;
 
     if (balance === undefined || nonce === undefined || code === undefined) {
-      const cacheKey = `${this._contextBlockNumber}-${address.toString()}`;
-      let accountData = this._accountCache.get(cacheKey);
-
-      if (accountData === undefined) {
-        accountData = await this._jsonRpcClient.getAccountData(
-          address,
-          this._contextBlockNumber
-        );
-
-        this._accountCache.set(cacheKey, accountData);
-      }
+      const accountData = await this._jsonRpcClient.getAccountData(
+        address,
+        this._contextBlockNumber
+      );
 
       if (nonce === undefined) {
         nonce = accountData.transactionCount;
@@ -189,8 +173,6 @@ export class ForkStateManager implements StateManager {
       this._contextBlockNumber
     );
 
-    await this.putContractCode(address, accountData.code);
-
     return accountData.code;
   }
 
@@ -215,18 +197,11 @@ export class ForkStateManager implements StateManager {
       return toBuffer([]);
     }
 
-    const cacheKey = `${address.toString()}-${bufferToHex(key)}`;
-    let remoteValue = this._storageCache.get(cacheKey);
-
-    if (remoteValue === undefined) {
-      remoteValue = await this._jsonRpcClient.getStorageAt(
-        address,
-        bufferToBigInt(key),
-        this._contextBlockNumber
-      );
-
-      this._storageCache.set(cacheKey, remoteValue);
-    }
+    const remoteValue = await this._jsonRpcClient.getStorageAt(
+      address,
+      bufferToBigInt(key),
+      this._contextBlockNumber
+    );
 
     return unpadBuffer(remoteValue);
   }
@@ -415,27 +390,6 @@ export class ForkStateManager implements StateManager {
     return value;
   }
 
-  public async hasStateRoot(root: Buffer): Promise<boolean> {
-    return this._state.has(bufferToHex(root));
-  }
-
-  public async flush(): Promise<void> {
-    // not implemented
-  }
-
-  public async modifyAccountFields(
-    address: Address,
-    accountFields: any
-  ): Promise<void> {
-    // copied from BaseStateManager
-    const account = await this.getAccount(address);
-    account.nonce = accountFields.nonce ?? account.nonce;
-    account.balance = accountFields.balance ?? account.balance;
-    account.storageRoot = accountFields.storageRoot ?? account.storageRoot;
-    account.codeHash = accountFields.codeHash ?? account.codeHash;
-    await this.putAccount(address, account);
-  }
-
   private _putAccount(address: Address, account: Account): void {
     // Because the vm only ever modifies the nonce, balance and codeHash using this
     // method we ignore the stateRoot property
@@ -461,5 +415,26 @@ export class ForkStateManager implements StateManager {
     }
     this._stateRoot = newRoot;
     this._state = state;
+  }
+
+  public async hasStateRoot(root: Buffer): Promise<boolean> {
+    return this._state.has(bufferToHex(root));
+  }
+
+  public async flush(): Promise<void> {
+    // not implemented
+  }
+
+  public async modifyAccountFields(
+    address: Address,
+    accountFields: any
+  ): Promise<void> {
+    // copied from BaseStateManager
+    const account = await this.getAccount(address);
+    account.nonce = accountFields.nonce ?? account.nonce;
+    account.balance = accountFields.balance ?? account.balance;
+    account.storageRoot = accountFields.storageRoot ?? account.storageRoot;
+    account.codeHash = accountFields.codeHash ?? account.codeHash;
+    await this.putAccount(address, account);
   }
 }
