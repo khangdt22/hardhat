@@ -98,6 +98,7 @@
     },
     "dependencies": {
         "@ethersproject/abi": "^5.1.2",
+        "@khangdt22/utils": "^0.0.7",
         "@metamask/eth-sig-util": "^4.0.0",
         "@nomicfoundation/ethereumjs-block": "5.0.2",
         "@nomicfoundation/ethereumjs-blockchain": "7.0.2",
@@ -144,6 +145,7 @@
         "tsort": "0.0.1",
         "undici": "^5.14.0",
         "uuid": "^8.3.2",
+        "web3-providers-ipc": "^4.0.5",
         "ws": "^7.4.6"
     },
     "peerDependencies": {

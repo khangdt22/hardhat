@@ -1,5 +1,6 @@
 import chalk from "chalk";
 
+import { isHttpUrl } from "@khangdt22/utils/url";
 import { HARDHAT_NETWORK_NAME } from "../../../constants";
 import { assertHardhatInvariant } from "../../../core/errors";
 import {
@@ -11,6 +12,7 @@ import { JsonRpcClient } from "../../jsonrpc/client";
 import { ForkConfig } from "../node-types";
 import { RpcBlockOutput } from "../output";
 
+import { IpcProvider } from "../../../core/providers/ipc";
 import {
   FALLBACK_MAX_REORG,
   getLargestPossibleReorg,
@@ -32,12 +34,21 @@ export async function makeForkClient(
   forkBlockTimestamp: number;
   forkBlockHash: string;
 }> {
-  const provider = new HttpProvider(
-    forkConfig.jsonRpcUrl,
-    HARDHAT_NETWORK_NAME,
-    forkConfig.httpHeaders,
-    FORK_HTTP_TIMEOUT
-  );
+  let provider: HttpProvider;
+
+  if (isHttpUrl(forkConfig.jsonRpcUrl)) {
+    provider = new HttpProvider(
+      forkConfig.jsonRpcUrl,
+      HARDHAT_NETWORK_NAME,
+      forkConfig.httpHeaders,
+      FORK_HTTP_TIMEOUT
+    );
+  } else {
+    provider = new IpcProvider(
+      forkConfig.jsonRpcUrl,
+      FORK_HTTP_TIMEOUT
+    ) as unknown as HttpProvider;
+  }
 
   const networkId = await getNetworkId(provider);
   const actualMaxReorg = getLargestPossibleReorg(networkId);
@@ -133,6 +144,7 @@ export function getLastSafeBlock(
   maxReorg: bigint
 ): bigint {
   // Design choice: if latestBlock - maxReorg results in a negative number then the latestBlock block will be used.
-  // This decision is based on the assumption that if maxReorg > latestBlock then there is a high probability that the fork is occurring on a devnet.
+  // This decision is based on the assumption that if maxReorg > latestBlock then there is a high probability that
+  // the fork is occurring on a devnet.
   return latestBlock - maxReorg >= 0 ? latestBlock - maxReorg : latestBlock;
 }
