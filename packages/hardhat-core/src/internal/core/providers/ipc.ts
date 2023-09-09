@@ -16,7 +16,9 @@ export class IpcProvider extends EventEmitter implements EIP1193Provider {
   ) {
     super();
 
-    this._provider = cache.get(_path) ?? new Web3IpcProvider(_path);
+    this._provider =
+      cache.get(_path) ??
+      new Web3IpcProvider(_path, {}, { autoReconnect: false });
 
     if (!cache.has(_path)) {
       cache.set(_path, this._provider);
@@ -44,9 +46,12 @@ export class IpcProvider extends EventEmitter implements EIP1193Provider {
       batch.map((b) => this._getJsonRpcRequest(b.method, b.params)) as any
     );
 
-    const response = await timeout(request, this._timeout);
+    const response = (await timeout(
+      request,
+      this._timeout
+    )) as unknown as any[];
 
-    return response.result;
+    return response.map((r) => r.result);
   }
 
   private _getJsonRpcRequest(
